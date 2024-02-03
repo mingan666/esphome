@@ -36,7 +36,7 @@ void SoilSensorComponent::update() {
     }
     if (uint16_t value = this->adafruit_seesaw_.touchRead(0))
     {
-      float moist = value;
+      float moist = this->percentage(value);
       this->moisture_sensor_->publish_state(moist);
     }
   }
@@ -45,5 +45,27 @@ void SoilSensorComponent::update() {
     ESP_LOGE(TAG, "Failed to update, sensor not connected on address: 0x%02X", this->address_);
   }
 }
+
+float SoilSensorComponent::percentage(float x) {
+  float in_min = 200;
+  float in_max = 2000;
+  float out_min = 0;
+  float out_max = 100;
+
+  const float dividend = out_max - out_min;
+  const float divisor = in_max - in_min;
+  const float delta = x - in_min;
+
+  return (delta * dividend + (divisor / 2)) / divisor + out_min;
+}
+
+//  def fit_linear(x, y):
+//                         assert len(x) == len(y)
+//                                              m_x, m_y = _mean(x), _mean(y)
+//                          r = _correlation_coeff(x, y)
+//                              k = r * (_std(y) / _std(x))
+//                                          b = m_y - k * m_x
+//                                                        return k, b
+//
 }
 }

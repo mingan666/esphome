@@ -3,6 +3,7 @@
 
 #include "esphome/core/component.h"
 #include "esphome/components/sensor/sensor.h"
+#include "esphome/components/sensor/filter.h"
 #include <Adafruit_seesaw.h>
 
 namespace esphome {
@@ -25,6 +26,8 @@ class SoilSensorComponent : public PollingComponent {
   sensor::Sensor *temperature_sensor_;
   uint8_t address_;
   bool connected_;
+
+  float percentage(float value);
 };
 
 }  // namespace adafruit_soil_sensor
