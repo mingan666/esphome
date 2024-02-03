@@ -23,7 +23,7 @@ CONFIG_SCHEMA = cv.Schema(
         cv.GenerateID(): cv.declare_id(SoilSensorComponent),
         cv.Required(CONF_ADDRESS): cv.uint8_t,
         cv.Optional(CONF_MOISTURE): sensor.sensor_schema(
-            accuracy_decimals=1,
+            accuracy_decimals=0,
             unit_of_measurement=UNIT_PERCENT,
             icon=ICON_WATER_PERCENT,
             state_class=STATE_CLASS_MEASUREMENT,
