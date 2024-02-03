@@ -11,6 +11,7 @@ namespace adafruit_soil_sensor {
 class SoilSensorComponent : public PollingComponent {
  public:
   void set_moisture_sensor(sensor::Sensor *moisture_sensor) { this->moisture_sensor_ = moisture_sensor; }
+  void set_temperature_sensor(sensor::Sensor *temperature_sensor) { this->temperature_sensor_ = temperature_sensor; }
   void set_address(uint8_t address) { this->address_ = address; }
 
   void setup() override;
@@ -19,8 +20,9 @@ class SoilSensorComponent : public PollingComponent {
   void update() override;
 
  protected:
-  Adafruit_seesaw adafruit_seesaw;
+  Adafruit_seesaw adafruit_seesaw_;
   sensor::Sensor *moisture_sensor_;
+  sensor::Sensor *temperature_sensor_;
   uint8_t address_;
   bool connected_;
 };
