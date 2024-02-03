@@ -27,7 +27,7 @@ class SoilSensorComponent : public PollingComponent {
   bool connected_;
 };
 
-}
-}
+}  // namespace adafruit_soil_sensor
+}  // namespace esphome
 
 #endif

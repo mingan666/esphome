@@ -21,9 +21,9 @@ void SoilSensorComponent::setup() {
 
 void SoilSensorComponent::dump_config() {
   ESP_LOGCONFIG(TAG, "Adafruit Soil Sensor:");
-  ESP_LOGCONFIG("  ", "Address: 0x%02X", this->address_);
-  LOG_SENSOR("  ", "Moisture sensor:", this->moisture_sensor_);
-  LOG_SENSOR("  ", "Temperature sensor", this->temperature_sensor_);
+  ESP_LOGCONFIG(TAG, "  Address: 0x%02X", this->address_);
+  LOG_SENSOR("  ", "Moisture:", this->moisture_sensor_);
+  LOG_SENSOR("  ", "Temperature:", this->temperature_sensor_);
 }
 
 float SoilSensorComponent::get_setup_priority() const { return setup_priority::DATA; }

@@ -10,6 +10,7 @@ from esphome.const import (
     UNIT_CELSIUS,
     ICON_WATER_PERCENT,
     ICON_THERMOMETER,
+    STATE_CLASS_MEASUREMENT,
 )
 
 adafruit_soil_sensor_ns = cg.esphome_ns.namespace("adafruit_soil_sensor")
@@ -25,11 +26,13 @@ CONFIG_SCHEMA = cv.Schema(
             accuracy_decimals=1,
             unit_of_measurement=UNIT_PERCENT,
             icon=ICON_WATER_PERCENT,
+            state_class=STATE_CLASS_MEASUREMENT,
         ),
         cv.Optional(CONF_TEMPERATURE): sensor.sensor_schema(
             accuracy_decimals=1,
             unit_of_measurement=UNIT_CELSIUS,
             icon=ICON_THERMOMETER,
+            state_class=STATE_CLASS_MEASUREMENT,
         ),
     }
 ).extend(cv.polling_component_schema("60s"))
