@@ -11,6 +11,7 @@ void SoilSensorComponent::setup() {
   {
     ESP_LOGE(TAG, "Failure to connect to sensor on address: 0x%02X", this->address_);
     this->connected_ = false;
+    this->status_set_error();
   }
   else
   {
@@ -59,13 +60,5 @@ float SoilSensorComponent::percentage(float x) {
   return (delta * dividend + (divisor / 2)) / divisor + out_min;
 }
 
-//  def fit_linear(x, y):
-//                         assert len(x) == len(y)
-//                                              m_x, m_y = _mean(x), _mean(y)
-//                          r = _correlation_coeff(x, y)
-//                              k = r * (_std(y) / _std(x))
-//                                          b = m_y - k * m_x
-//                                                        return k, b
-//
-}
-}
+}  // namespace adafruit_soil_sensor
+}  // namespace esphome
