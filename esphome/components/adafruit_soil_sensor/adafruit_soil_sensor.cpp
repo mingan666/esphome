@@ -24,6 +24,7 @@ void SoilSensorComponent::dump_config() {
   ESP_LOGCONFIG(TAG, "Adafruit Soil Sensor:");
   ESP_LOGCONFIG(TAG, "  Address: 0x%02X", this->address_);
   LOG_SENSOR("  ", "Moisture:", this->moisture_sensor_);
+  LOG_SENSOR("  ", "Raw moisture:", this->raw_sensor_);
   LOG_SENSOR("  ", "Temperature:", this->temperature_sensor_);
 }
 
