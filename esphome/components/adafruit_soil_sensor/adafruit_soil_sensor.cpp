@@ -37,7 +37,9 @@ void SoilSensorComponent::update() {
     }
     if (uint16_t value = this->adafruit_seesaw_.touchRead(0))
     {
-      float moist = this->percentage(value);
+      float raw = value;
+      this->raw_sensor_->publish_state(raw);
+      float moist = this->percentage(raw);
       this->moisture_sensor_->publish_state(moist);
     }
   }

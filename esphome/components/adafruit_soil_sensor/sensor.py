@@ -6,10 +6,13 @@ from esphome.const import (
     CONF_ADDRESS,
     CONF_MOISTURE,
     CONF_TEMPERATURE,
+    CONF_RAW,
     UNIT_PERCENT,
     UNIT_CELSIUS,
+    UNIT_EMPTY,
     ICON_WATER_PERCENT,
     ICON_THERMOMETER,
+    ICON_WATER,
     STATE_CLASS_MEASUREMENT,
 )
 
@@ -26,6 +29,12 @@ CONFIG_SCHEMA = cv.Schema(
             accuracy_decimals=0,
             unit_of_measurement=UNIT_PERCENT,
             icon=ICON_WATER_PERCENT,
+            state_class=STATE_CLASS_MEASUREMENT,
+        ),
+        cv.Optional(CONF_RAW): sensor.sensor_schema(
+            accuracy_decimals=0,
+            unit_of_measurement=UNIT_EMPTY,
+            icon=ICON_WATER,
             state_class=STATE_CLASS_MEASUREMENT,
         ),
         cv.Optional(CONF_TEMPERATURE): sensor.sensor_schema(
@@ -47,6 +56,10 @@ def to_code(config):
     if CONF_MOISTURE in config:
         moisture_sensor = yield sensor.new_sensor(config[CONF_MOISTURE])
         cg.add(var.set_moisture_sensor(moisture_sensor))
+
+    if CONF_RAW in config:
+        raw_sensor = yield sensor.new_sensor(config[CONF_RAW])
+        cg.add(var.set_raw_sensor(raw_sensor))
 
     if CONF_TEMPERATURE in config:
         temp_sensor = yield sensor.new_sensor(config[CONF_TEMPERATURE])
