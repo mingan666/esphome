@@ -44,7 +44,7 @@ CONFIG_SCHEMA = cv.Schema(
             state_class=STATE_CLASS_MEASUREMENT,
         ),
     }
-).extend(cv.polling_component_schema("60s"))
+).extend(cv.polling_component_schema("2s"))
 
 
 def to_code(config):
