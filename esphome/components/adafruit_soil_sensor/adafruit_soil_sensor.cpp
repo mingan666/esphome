@@ -31,6 +31,16 @@ void SoilSensorComponent::dump_config() {
 float SoilSensorComponent::get_setup_priority() const { return setup_priority::DATA; }
 
 void SoilSensorComponent::update() {
+  if(this->status_has_error()) {
+//    this->status_set_error();
+    ESP_LOGD(TAG, "Component has error");
+  }
+  else if(this->status_has_warning()) {
+    ESP_LOGD(TAG, "Component has warning");
+  }
+  else {
+    ESP_LOGD(TAG, "Component has no error or warning");
+  }
   if(this->connected_) {
     if (float temp = this->adafruit_seesaw_.getTemp())
     {
@@ -46,7 +56,7 @@ void SoilSensorComponent::update() {
   }
   else
   {
-    ESP_LOGE(TAG, "Failed to update, sensor not connected on address: 0x%02X", this->address_);
+//    ESP_LOGE(TAG, "Failed to update, sensor not connected on address: 0x%02X", this->address_);
   }
 }
 
